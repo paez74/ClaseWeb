@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="calculator.css">
+  <title>lab items list</title>
+  <script src="./utils.js"></script>
+
+</head>
+<body>
+  <br>
+  <div id="container">
+    Item: <input type="text" id="item-name">
+    Value: <input type="text" id="item-value">
+    <button id="addElement" class="add-item" onclick="addElement(document.getElementById('item-name').value,document.getElementById('item-value').value)"> add</button>
+  </div>
+  <ul id="list" class="items">
+  </ul>
+  <div class = "total">
+  Total <div id="total"> $0</div> </div>
+</body>
+</html>
