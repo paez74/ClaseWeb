@@ -3,25 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>lab items list</title>
-  <script src="./utils.js"></script>
-  <script>
-    // DOMContentLoaded wait until all dom is loaded, check the docs in below link
-    // https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
-    document.addEventListener("DOMContentLoaded", (_) => {
-      // use here what you have in utils.js
-    });
-  </script>
+  <link rel="stylesheet" href="pokemonCalculator.css">
+  <title>Pokemon Weight Calculator</title>
+  <script src="util.js"></script>
+
 </head>
 <body>
+  <br>
   <div id="container">
-    name: <input type="text" id="pokemon-name">
-    <button id="add-item"> add</button>
+    Pokemon Name: <input type="text" id="item-name">
+    <button id="addElement" class="add-item" onclick="addElement(document.getElementById('item-name').value)"> Find</button>
   </div>
-  <ul class="items">
-
+  <div id="error-message" class="invisible error">
+    The pokemon you looked for does not exist :(
+  </div>
+  <ul id="list" class="items">  
   </ul>
-  <div id="total"></div>
-  <div id="error"></div>
+  <div class = "total">
+  Total <div id="total"> 0kg</div> </div>
 </body>
 </html>

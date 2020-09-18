@@ -1,47 +1,93 @@
-/*this is one template function that can be passed to add_item_to_list_with_template 
-  and add the remove event of the button
-  or you can create another template function wich create a dom element like 
-  Document.createElement() and add the event to that element
-  https://developer.mozilla.org/es/docs/Web/API/Document/createElement 
-*/
-let get_element_li  = (name, price) => {
-  return `<li class="added-pokemon">name: ${name} <div class="weight">weight: ${price} </div> <button class="remove-pokemon">remove</button></li>`
-}
 
-let add_item_to_list_with_template = (template_function) => {
-  return (event) => {
 
-  }
-}
-/*
- for removing elements could be this way
-  let element_to_delete = document.querySelector("selector").lastElementChild;
-  element_to_delete.parentNode.removeChild(element_to_delete);
-  or we could use ChildNode.remove()
-  https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove
-*/
-let remove_element_event = (event) => {
-  // check which dom element triggered the event of remove, that is in event
-  let remove_item  = (node_to_remove) => {
-    // add the remove logic here 
-  }
-}
-
-let thenable_handle_for_the_result_of_the_pokemon_request = (result) => {
-  //handle here the pokemon from the request
-}
-
-let catchable_handle_for_the_error_of_the_pokemon_request = (err) => {
-  //handle here the pokemon error from the request
-}
-
-/* 
-  for this it can be solved by adding a custom XMLHttpRequest but i don't recomend it, try to 
-  use other libs that basically solve this, an alternative you can use axios 
-  https://www.npmjs.com/package/axios
-*/
-let get_pokemon_data = () => {
+var totalWeight = 0;
+var pokemons = [];
+let getPokemonPromise = (pokemonName) => {
   return new Promise((resolve, reject) => {
-    // add the logic of the request here
+    let req = new XMLHttpRequest();
+    req.open("GET", `https://pokeapi.co/api/v2/pokemon/${pokemonName}`, true);
+    req.onreadystatechange = (req_event) => {
+      if (req.readyState == 4) {
+        if (req.status == 200) {
+          return resolve(req.response);
+        } else {
+          showErrorMessage(pokemonName)
+          return reject(req.reject);
+        }
+      }
+    };
+    req.send(null);
+  });
+};
+
+function addElement(name){
+  var itemName = document.getElementById('item-name');
+  var pokemon = null;
+  if(!name) {
+    itemName.className = "error";
+    return;
+  }
+  itemName.className= "";
+  getPokemonPromise(name.toLowerCase()).then(result => {
+    pokemon = JSON.parse(result);
+    if(!pokemons.some(x => x == pokemon.name))
+    addPokemon(pokemon);
   })
+
+  
 }
+function addPokemon(pokemon) {
+  var node = document.createElement('li');
+  node.className ="added-item";
+  node.innerText = "Name: " + pokemon.name;
+  pokemons.push(pokemon.name);
+  // sprites.front_default
+  var firstNode = document.createElement('img');
+  firstNode.src = pokemon.sprites.front_default;
+  firstNode.className ="image";
+  node.appendChild(firstNode);
+  var secondnode = document.createElement('button')
+  secondnode.innerText = "remove";
+  secondnode.className="remove-item";
+  secondnode.addEventListener('click', function(){
+    remove_item(node,pokemon.weight * -1,pokemon.name);
+});
+  node.appendChild(secondnode);
+
+  var parent = document.getElementById('list');
+  parent.appendChild(node);
+  clean();
+  calculateTotal(pokemon.weight);
+}
+
+function clean(){
+  var itemName = document.getElementById('item-name');
+  itemName.value ="";
+}
+
+function calculateTotal(weight) {
+
+  var total = document.getElementById('total');
+  totalWeight+=weight;
+  total.innerText = totalWeight.toString() + " kg";
+
+
+}
+
+function showErrorMessage(pokemonName) {
+  var errorMessage = document.getElementById('error-message');
+  errorMessage.innerText = "The pokemon " + pokemonName +  " does not exist :("
+  errorMessage.className ="visible error";
+  setTimeout(HideErrorMessage,10000)
+}
+function HideErrorMessage() {
+  var errorMessage = document.getElementById('error-message');
+  errorMessage.className ="invisible error";
+}
+let remove_item  = (parent,weight,pokemonName) => {
+  var index = pokemons.indexOf(pokemonName);
+  pokemons.splice(index,1);
+  parent.remove();
+  calculateTotal(weight);
+}
+
