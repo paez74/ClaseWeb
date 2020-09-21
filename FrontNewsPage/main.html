@@ -1,0 +1,67 @@
+<html id="tema" class="claro">
+
+<head>
+    <title>Our Site</title>
+    <link rel="stylesheet" href="style/style.css">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <img src="img/logo.png" alt="">
+        </div>
+        <a href="">
+            <div>Home</div>
+        </a>
+        <a href="">
+            <div>About us</div>
+        </a>
+        <a href="">
+            <div>Services</div>
+        </a>
+        <a href="">
+            <div>Contact</div>
+        </a>
+    </nav>
+    <div class="selector">
+        <a onclick="myFunctionClaro()">Claro</a> <a onclick="myFunctionOscuro()">Oscuro</a>
+    </div>
+    <div class="cuerpo">
+        <div>
+            <h2>Column 1</h2>
+            <img src="img/imagen1.jpg" style="width:100%;">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta rerum quaerat asperiores laboriosam architecto minus assumenda repellat, consectetur perferendis sapiente voluptas quis nulla quasi velit id corrupti et rem repellendus?</p>
+        </div>
+        <div>
+            <h2>Column 2</h2>
+
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta rerum quaerat asperiores laboriosam architecto minus assumenda repellat, consectetur perferendis sapiente voluptas quis nulla quasi velit id corrupti et rem repellendus?</p>
+        </div>
+        <div>
+            <h2>Column 3</h2>
+
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta rerum quaerat asperiores laboriosam architecto minus assumenda repellat, consectetur perferendis sapiente voluptas quis nulla quasi velit id corrupti et rem repellendus?</p>
+        </div>
+    </div>
+    <div class="footer">
+        Copyright 2020 All Rights
+    </div>
+    <script type="text/javascript">
+        function myFunctionOscuro() {
+            var element = document.getElementById("tema");
+            element.classList.remove("claro");
+            element.classList.add("oscuro");
+        }
+
+        function myFunctionClaro() {
+            var element = document.getElementById("tema");
+            element.classList.remove("oscuro");
+            element.classList.add("claro");
+        }
+    </script>
+
+</body>
+
+</html>
