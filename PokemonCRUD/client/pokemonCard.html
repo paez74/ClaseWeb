@@ -13,6 +13,19 @@
   <div id="container">
     Pokemon Name: <input type="text" id="item-name">
     <button id="addElement" class="add-item" onclick="addElement(document.getElementById('item-name').value)"> Find</button>
+    <button id="addElement" class="add-item" onclick="addElements()"> Find All</button>
+  </div>
+  <div id="create-form">
+    Name: <input type="text" id="pokemon-name">
+    Description: <input type="text" id="pokemon-description">
+    Code: <input type="text" id="pokemon-code">
+    Type: <select name="type" id="pokemon-type"> 
+          <option value="item"> Item </option>
+          <option value="price"> Price </option>
+          <option value="element"> Element </option>
+          </select>
+    <button id="createElement" class="add-item" onclick="createCard(document.getElementById('pokemon-name').value,document.getElementById('pokemon-description').value,
+    document.getElementById('pokemon-code').value,document.getElementById('pokemon-type').value)"> Insert Card</button>
   </div>
   <div id="error-message" class="invisible error">
     The pokemon you looked for does not exist :(

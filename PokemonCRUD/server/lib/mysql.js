@@ -33,8 +33,7 @@ db.pokemonCard = pokemonCardModel;
 
 (async () => {
     try {
-        await sequelize.dropAllSchemas();
-        await sequelize.sync({ force: true });
+        await sequelize.sync();
     } catch (error) {
         console.log(error);
     }

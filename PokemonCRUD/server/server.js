@@ -7,6 +7,7 @@ var db = require('./lib/mysql.js');
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", null); // update to match the domain you will make the request from set to null because of origin
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
   next();
 });
 
@@ -89,14 +90,14 @@ app.put('/updateCard',jsonParser,function(req,res) {
 
 })
 
-app.delete('/:pokemonCardName',function(req,res){
-  var pokemonName = req.params.pokmeonCardName;
+app.delete('/:pokemonId',function(req,res){
+  var pokemonId = req.params.pokemonId;
   db.pokemonCard.destroy({
     where: {
-      name:pokemonName
+      id:pokemonId
     }
   }).then(function (destroyedCard){
-    res.send(destroyedCard);
+    res.send(true);
   }).catch(function(error){
     console.log(error);
     res.status(400).send({
